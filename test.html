@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Игра Кликер</title>
+<style>
+  body, html {
+    height: 100%;
+    margin: 0;
+    font-family: Arial, sans-serif;
+  }
+  .background {
+    background-image: url('habitat.png');
+    height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+  .clicker {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+  }
+  .hippo-coin {
+    height: auto; /* Автоматический размер по высоте */
+    width: 20%; /* Ширина картинки в процентах для адаптивности */
+    max-width: 100px; /* Максимальная ширина картинки */
+    cursor: pointer;
+  }
+</style>
+</head>
+<body>
+<div class="background">
+  <div class="clicker">
+    <img src="hippo_coin.png" class="hippo-coin" onclick="addPoint()" alt="Hippo Coin">
+  </div>
+  <div id="score" style="color: white; text-align: center; font-size: 2em; position: absolute; width: 100%; top: 20px;">Баллы: 0</div>
+</div>
+<script>
+  var score = localStorage.getItem('score') ? parseInt(localStorage.getItem('score')) : 0;
+  document.getElementById('score').innerText = 'Баллы: ' + score;
+
+  function addPoint() {
+    score++;
+    document.getElementById('score').innerText = 'Баллы: ' + score;
+    localStorage.setItem('score', score);
+  }
+
+  window.onbeforeunload = function() {
+    localStorage.setItem('score', score);
+  };
+</script>
+</body>
+</html>
